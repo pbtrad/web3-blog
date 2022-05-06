@@ -41,6 +41,16 @@ contract Blog {
         return hashToPost[hash];
     }
 
+    function updatePost(uint postId, string memory title, string memory hash, bool published) public onlyOwner {
+        Post storage post =  idToPost[postId];
+        post.title = title;
+        post.published = published;
+        post.content = hash;
+        idToPost[postId] = post;
+        hashToPost[hash] = post;
+        emit PostUpdated(post.id, title, hash, published);
+    }
+
     function createPost(string memory title, string memory hash) public onlyOwner {
         _postIds.increment();
         uint postId = _postIds.current();
@@ -54,9 +64,9 @@ contract Blog {
     }
 
     function fetchPosts() public view returns (Post[] memory) {
-        uint itemCount = _postsIds.current();
+        uint itemCount = _postIds.current();
 
-        Post[] memory posts = new Post[](itemCount):
+        Post[] memory posts = new Post[](itemCount);
         for (uint i = 0; i < itemCount; i++) {
             uint currentId = i +1;
             Post storage currentItem = idToPost[currentId];
