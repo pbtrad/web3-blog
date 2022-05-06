@@ -1,4 +1,4 @@
-pragma solidity ^0.8.0
+pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -25,7 +25,7 @@ contract Blog {
 
     constructor(string memory _name) {
         console.log("Deploying Blog with name:", _name);
-        name = _name:
+        name = _name;
         owner = msg.sender;
     }
 
