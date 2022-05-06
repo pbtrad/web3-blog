@@ -64,4 +64,9 @@ contract Blog {
         }
         return posts;
     }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
 }
