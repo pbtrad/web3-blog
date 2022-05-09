@@ -11,9 +11,7 @@ import 'easymde/dist/easymde.min.css'
 import Image from 'next/image'
 
 function MyApp({ Component, pageProps }) {
-  /* create local state to save account information after signin */
   const [account, setAccount] = useState(null)
-  /* web3Modal configuration for enabling wallet access */
   async function getWeb3Modal() {
     const web3Modal = new Web3Modal({
       cacheProvider: false,
@@ -29,7 +27,6 @@ function MyApp({ Component, pageProps }) {
     return web3Modal
   }
 
-  /* the connect function uses web3 modal to connect to the user's wallet */
   async function connect() {
     try {
       const web3Modal = await getWeb3Modal()
@@ -81,8 +78,6 @@ function MyApp({ Component, pageProps }) {
             </a>
           </Link>
           {
-            /* if the signed in user is the contract owner, we */
-            /* show the nav link to create a new post */
             (account === ownerAddress) && (
               <Link href="/create-post">
                 <a className={link}>
